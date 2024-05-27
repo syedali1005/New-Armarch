@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   height: 100vh;
+  background-color: #f9fafb; /* Add a light background color */
 }
 
 .ql-editor {
@@ -11,20 +13,20 @@ body {
 }
 
 .post-content p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem; /* Increase spacing between paragraphs */
 }
 
 .post-content h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  font-family: sans-serif;
-  margin: 1.5rem 0;
+  font-size: 2.5rem; /* Increase font size for main headings */
+  font-weight: 700; /* Increase font weight for main headings */
+  font-family: 'Arial', sans-serif; /* Change font family */
+  margin: 2rem 0; /* Increase top and bottom margins for main headings */
 }
 
 .post-content h2 {
-  font-size: 1.4rem;
-  font-family: sans-serif;
-  margin: 1.5rem 0;
+  font-size: 2rem; /* Increase font size for subheadings */
+  font-family: 'Arial', sans-serif; /* Change font family */
+  margin: 1.5rem 0; /* Increase top and bottom margins for subheadings */
 }
 
 .post-content a {
@@ -38,4 +40,80 @@ body {
 
 .dark .post-content a {
   color: red;
+}
+
+/* Shadows */
+.shadow-dark {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-light {
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.08);
+}
+
+/* Rounded corners */
+.rounded-dark {
+  border-radius: 0.75rem;
+}
+
+.rounded-light {
+  border-radius: 0.75rem;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 229, 140, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes border-pulse {
+  0% {
+    transform: scale(1);
+    border-color: rgba(255, 229, 140, 0.7); 
+  }
+
+  50% {
+    transform: scale(1.05);
+    border-color: rgba(255, 229, 140, 0.5); 
+  }
+
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 229, 140, 0.7);
+  }
+}
+
+.image-container {
+  position: relative;
+}
+
+.border-animation {
+  margin-top: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 5px solid transparent;
+  border-radius: 16px;
+  pointer-events: none;
+  animation: border-pulse 2s infinite;
+}
+
+.gradient-yellow-to-yellow {
+  background: linear-gradient(90deg, #FFE58C 0%, #FFE58C 100%);
 }
