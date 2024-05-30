@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export default function PostCard({ post }) {
+  // Check if post.images array exists and has at least one image
+  if (!post.images || post.images.length === 0) {
+    return null; // or render a placeholder image or some alternative content
+  }
+
   return (
     <div className="group relative w-full max-w-[300px] gap-8 border border-teal-500 hover:border-2 h-[320px] overflow-hidden rounded-lg transition-all shadow-lg">
       <Link to={`/post/${post.slug}`}>
         <img
-          src={post.image}
+          src={post.images[0]} // Render only the first image from the array
           alt="post cover"
           className="h-[180px] w-full object-cover transition-all duration-300 transform group-hover:scale-105"
         />
@@ -28,7 +33,7 @@ export default function PostCard({ post }) {
 PostCard.propTypes = {
   post: PropTypes.shape({
     slug: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string), // Array of image URLs
     title: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }).isRequired,

@@ -1,6 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Link } from 'react-router-dom';
-import CallToAction from '../components/CallToAction';
 import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
 
@@ -54,9 +52,6 @@ export default function Home() {
             >
               View all posts
             </Link>
-             <div className='p-3 bg-amber-100 dark:bg-slate-700'>
-        <CallToAction />
-      </div>
           </div>
         )}
       </div>

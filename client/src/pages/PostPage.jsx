@@ -1,7 +1,8 @@
-import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Button, Spinner } from "flowbite-react";
 import CallToAction from "../components/CallToAction";
+import 'lazysizes'; // Import lazysizes for lazy loading
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -44,6 +45,7 @@ export default function PostPage() {
         <Spinner size="xl" />
       </div>
     );
+
   return (
     <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
       {post && (
@@ -63,17 +65,22 @@ export default function PostPage() {
               {post.category}
             </Button>
           </Link>
-          <div
-            className="image-container relative overflow-hidden rounded-lg"
-            style={fadeInAnimation}
-          >
-            <img
-              src={post.image}
-              alt={post.title}
-              className="max-h-full max-w-full object-cover rounded-lg mt-16"
-              style={fadeInAnimation}
-            />
-            <div className="border-animation"></div>
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            {post.images.map((image, index) => (
+              <div
+                key={index}
+                className="max-w-md w-full md:max-w-lg transform transition-transform hover:scale-105"
+              >
+                <div className="w-full h-auto object-cover rounded-lg shadow-md bg-gray-200" style={{ minHeight: '270px' }}>
+                  <img
+                    data-src={image}
+                    alt={`Image ${index}`}
+                    loading="lazy"
+                    className="w-full h-auto object-cover rounded-lg shadow-md lazyload"
+                  />
+                </div>
+              </div>
+            ))}
           </div>
           <div
             className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs"
@@ -85,8 +92,7 @@ export default function PostPage() {
             className="p-3 max-w-2xl mx-auto w-full post-content leading-relaxed"
             dangerouslySetInnerHTML={{ __html: post.content }}
             style={fadeInAnimation}
-          >
-          </div>
+          ></div>
           <div className="max-w-4xl mx-auto w-full">
             <CallToAction />
           </div>
