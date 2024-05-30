@@ -81,9 +81,6 @@ export default function DashPosts() {
               <Table.HeadCell>Post title</Table.HeadCell>
               <Table.HeadCell>Category</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
-              <Table.HeadCell>
-                <span>Edit</span>
-              </Table.HeadCell>
             </Table.Head>
             {userPosts.map((post, index) => (
               <Table.Body key={index} className='divide-y'>
@@ -119,14 +116,6 @@ export default function DashPosts() {
                     >
                       Delete
                     </span>
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Link
-                      className='text-teal-500 hover:underline'
-                      to={`/update-post/${post._id}`}
-                    >
-                      <span>Edit</span>
-                    </Link>
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>

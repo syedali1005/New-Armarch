@@ -84,24 +84,31 @@ export const deletepost = async (req, res, next) => {
 };
 
 export const updatepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, 'You are not allowed to update this post'));
-  }
   try {
-    const updatedPost = await Post.findByIdAndUpdate(
-      req.params.postId,
-      {
-        $set: {
-          title: req.body.title,
-          content: req.body.content,
-          category: req.body.category,
-          images: req.body.images,
-        },
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(errorHandler(403, 'You are not allowed to update this post'));
+  }
+  const updatedPost = await Post.findByIdAndUpdate(
+    req.params.postId,
+    {
+      $set: {
+        title: req.body.title,
+        content: req.body.content,
+        category: req.body.category,
+        images: req.body.images,
       },
-      { new: true }
-    );
+    },
+    { new: true }
+  );
+    // Check if the post was successfully updated
+    if (!updatedPost) {
+      return next(errorHandler(404, 'Post not found'));
+    }
+
+    // Return the updated post
     res.status(200).json(updatedPost);
   } catch (error) {
+    // Handle any errors that occur during the update operation
     next(error);
   }
 };
