@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Spinner } from "flowbite-react";
 import CallToAction from "../components/CallToAction";
-import 'lazysizes'; // Import lazysizes for lazy loading
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit'; // Add parent-fit plugin for better image fitting
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -21,11 +22,18 @@ export default function PostPage() {
           setLoading(false);
           return;
         }
-        if (res.ok) {
-          setPost(data.posts[0]);
-          setLoading(false);
-          setError(false);
-        }
+        setPost(data.posts[0]);
+        setLoading(false);
+        setError(false);
+
+        // Prefetch images
+        data.posts[0].images.forEach((image) => {
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = image;
+          document.head.appendChild(link);
+        });
+
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -77,6 +85,9 @@ export default function PostPage() {
                     alt={`Image ${index}`}
                     loading="lazy"
                     className="w-full h-auto object-cover rounded-lg shadow-md lazyload"
+                    data-sizes="auto"
+                    data-srcset={`${image}?w=400 400w, ${image}?w=800 800w, ${image}?w=1200 1200w`}
+                    sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
                   />
                 </div>
               </div>
