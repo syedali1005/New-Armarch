@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Spinner } from "flowbite-react";
 import CallToAction from "../components/CallToAction";
+import LazyLoad from 'react-lazyload'; // Import LazyLoad component
+import { motion } from "framer-motion";
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit'; // Add parent-fit plugin for better image fitting
 
@@ -42,73 +44,86 @@ export default function PostPage() {
     fetchPost();
   }, [postSlug]);
 
-  const fadeInAnimation = {
-    opacity: loading ? 0 : 1,
-    transition: "opacity 0.5s ease-in-out",
-  };
-
-  if (loading)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Spinner size="xl" />
-      </div>
-    );
-
   return (
-    <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
-      {post && (
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen"
+    >
+      {loading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          <Spinner size="xl" />
+        </div>
+      ) : (
         <>
-          <h1
+          <motion.h1
             className="text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4x"
-            style={fadeInAnimation}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             {post.title}
-          </h1>
+          </motion.h1>
           <Link
             to={`/search?category=${post.category}`}
             className="self-center mt-5"
-            style={fadeInAnimation}
           >
             <Button color="gray" pill size="xs" className="animate-pulse">
               {post.category}
             </Button>
           </Link>
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mt-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             {post.images.map((image, index) => (
-              <div
-                key={index}
-                className="max-w-md w-full md:max-w-lg transform transition-transform hover:scale-105"
-              >
-                <div className="w-full h-auto object-cover rounded-lg shadow-md bg-gray-200" style={{ minHeight: '270px' }}>
-                  <img
-                    data-src={image}
-                    alt={`Image ${index}`}
-                    loading="lazy"
-                    className="w-full h-auto object-cover rounded-lg shadow-md lazyload"
-                    data-sizes="auto"
-                    data-srcset={`${image}?w=400 400w, ${image}?w=800 800w, ${image}?w=1200 1200w`}
-                    sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
-                  />
+              <LazyLoad height={200} offset={100} key={index}>
+                <div
+                  className="max-w-md w-full md:max-w-lg transform transition-transform hover:scale-105"
+                >
+                  <div className="w-full h-auto object-cover rounded-lg shadow-md bg-gray-200" style={{ minHeight: '270px' }}>
+                    {/* Add loading animation here */}
+                    {loading ? (
+                      <div className="animate-pulse w-full h-auto object-cover rounded-lg shadow-md bg-gray-300" style={{ minHeight: '270px' }} />
+                    ) : (
+                      <img
+                        data-src={image}
+                        alt={`Image ${index}`}
+                        loading="lazy"
+                        className="w-full h-auto object-cover rounded-lg shadow-md lazyload"
+                        data-sizes="auto"
+                        data-srcset={`${image}?w=400 400w, ${image}?w=800 800w, ${image}?w=1200 1200w`}
+                        sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
+              </LazyLoad>
             ))}
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs"
-            style={fadeInAnimation}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
           >
             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="p-3 max-w-2xl mx-auto w-full post-content leading-relaxed"
             dangerouslySetInnerHTML={{ __html: post.content }}
-            style={fadeInAnimation}
-          ></div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          ></motion.div>
           <div className="max-w-4xl mx-auto w-full">
             <CallToAction />
           </div>
         </>
       )}
-    </main>
+    </motion.main>
   );
 }
