@@ -58,8 +58,8 @@ export default function Header() {
   };
 
   return (
- <Navbar className={`border-b-2 ${theme === 'dark' ? 'dark:bg-gray-900' : 'bg-white'}`}>     
-   <Link
+    <Navbar className={`border-b-2 ${theme === 'dark' ? 'dark:bg-gray-900' : 'bg-white'}`}>
+      <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
@@ -89,9 +89,9 @@ export default function Header() {
           pill
           onClick={() => dispatch(toggleTheme())}
         >
-          {theme === 'light'? <FaSun />: <FaMoon />}
+          {theme === 'light' ? <FaSun /> : <FaMoon />}
         </Button>
-        {currentUser ? (
+        {currentUser && (
           <Dropdown
             arrowIcon={false}
             inline
@@ -109,13 +109,7 @@ export default function Header() {
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
-          ) : (
-            <Link to='/sign-in'>
-              <Button gradientDuoTone='purpleToBlue' outline>
-                Sign In
-              </Button>
-            </Link>
-          )}
+        )}
         <NavbarToggle />
       </div>
       <NavbarCollapse>
@@ -131,4 +125,4 @@ export default function Header() {
       </NavbarCollapse>
     </Navbar>
   );
-} 
+}
