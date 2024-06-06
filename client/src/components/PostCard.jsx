@@ -16,9 +16,9 @@ export default function PostCard({ post }) {
           className="h-[180px] w-full object-cover transition-all duration-300 transform group-hover:scale-105"
         />
       </Link>
-      <div className="p-4 flex flex-col gap-2">
-        <p className="text-lg font-semibold line-clamp-2">{post.title}</p>
-        <span className="text-sm text-gray-600">{post.category}</span>
+      <div className="p-4 flex flex-col gap-1">
+        <p className="text-lg line-clamp-2 uppercase text-center">{post.title}</p>
+        <span className="text-sm text-gray-500 text-center">{post.category}</span>
         <Link
           to={`/post/${post.slug}`}
           className="absolute bottom-4 left-4 right-4 bg-yellow-500 text-white py-2 text-center rounded-md transition-all duration-300 hover:bg-yellow-600"

@@ -10,7 +10,7 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-3xl font font-semibold text-center my-7">
+            <h1 className="md:text-5xl font-semibold text-center mb-20 text-stroke-2-gold hero-title1">
               Welcome to Armarch
             </h1>
           </motion.div>
@@ -19,7 +19,7 @@ export default function About() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="text-md text-gray-500 flex flex-col gap-6">
+            <div className=" text-gray-400 text-xl flex flex-col gap-6 mt-10">
               <p>
                 At ArmArch, our philosophy revolves around our belief in the
                 transformative power of spaces. We aim to seamlessly blend

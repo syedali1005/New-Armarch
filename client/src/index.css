@@ -2,15 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
 body {
   height: 100vh;
   background-color: #f9fafb; /* Add a light background color */
+  font-family: "Oswald", sans-serif;
 }
 
+@media ( min-width:1147px){
+.hero-title {
+  font-size: 96px;
+  line-height: 1.104;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+}
+
+.hero-title{
+  color: rgba(255, 255, 255, 0.1) !important;
+}
+
+@media ( min-width:1147px){
+  .hero-title1 {
+    font-size: 40px;
+    line-height: 1.104;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.1) !important;
+  }
+  }
+
+  .hero-title1 {
+    font-size: 30px;
+    line-height: 1.104;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.1) !important;
+  }
 .ql-editor {
   font-size: 1.05rem;
 }
+
+@media ( min-width:1147px){
+  .jst{
+    justify-content: start;
+  }
+  }
 
 .post-content p {
   margin-bottom: 1rem; /* Increase spacing between paragraphs */
@@ -59,6 +103,7 @@ body {
 .rounded-light {
   border-radius: 0.75rem;
 }
+
 @keyframes pulse {
   0% {
     transform: scale(0.95);
@@ -117,6 +162,7 @@ body {
 .gradient-yellow-to-yellow {
   background: linear-gradient(90deg, #FFE58C 0%, #FFE58C 100%);
 }
+
 .blur {
   filter: blur(2px); /* Adjust the value to control the strength of the blur effect */
 }

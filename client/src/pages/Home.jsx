@@ -11,15 +11,15 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [carouselImages, setCarouselImages] = useState([
     {
-      src: '/D5_mk-6 1_20231225_001341.png',
+      src: '/aat3-01-1-e1709530321931.webp',
       text: 'WHERE ARCHITECTURE\nMEETS\nSUSTAINABILITY',
     },
     {
-      src: '/D5_Image 45_20231012_233520.png',
+      src: '/aat2-01-1-e1709530356401.webp',
       text: 'SUSTAINABLE DESIGNS,\nSUSTAINABLE\nFUTURE',
     },
     {
-      src: '/D5_Image 6_20231114_175628.png',
+      src: '/DFH-01-1-e1709370667112.webp',
       text: 'SUSTAINABLE DESIGN,\nFUTURE\nBUILDINGS',
     },
   ]);
@@ -80,12 +80,11 @@ export default function Home() {
       <div className="carousel-container w-full flex-1 relative">
         <Slider {...carouselSettings}>
           {carouselImages.map((image, index) => (
-            <div key={index} className="relative">
-              <img
-                src={image.src}
-                alt={`Slide ${index + 1}`}
-                className="w-full h-screen object-cover blur"
-              />
+            <div key={index} className="relative h-screen">
+              <div
+                className="w-full h-full bg-cover bg-center bg-fixed"
+                style={{ backgroundImage: `url(${image.src})` }}
+              ></div>
               <motion.div
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50"
                 initial={{ opacity: 0 }}
@@ -93,7 +92,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.5 }}
               >
                 <motion.h2
-                  className="text-white text-3xl md:text-5xl lg:text-7xl font-semibold text-center whitespace-pre-line leading-tight"
+                  className="hero-title text-stroke-2-gold text-3xl md:text-5xl lg:text-7xl font-semibold text-center whitespace-pre-line leading-tight"
                   style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}
                   variants={textVariants}
                   initial="initial"
@@ -115,7 +114,7 @@ export default function Home() {
       </div>
       <div className="max-w-6xl mx-auto px-6 py-10">
         <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl font-semibold text-center mb-10"
+          className="md:text-5xl font-semibold text-center mb-20 text-stroke-2-gold hero-title1"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
@@ -123,7 +122,7 @@ export default function Home() {
           Recent Projects
         </motion.h2>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-center"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 justify-center mt-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -146,9 +145,9 @@ export default function Home() {
         >
           <Link
             to="/search"
-            className="text-lg text-teal-500 dark:text-teal-300 hover:underline"
+            className="text-lg text-yellow-500 hover:underline inline-block border border-yellow-500 py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-yellow-500 hover:text-white"
           >
-            View all posts
+            View More
           </Link>
         </motion.div>
       </div>

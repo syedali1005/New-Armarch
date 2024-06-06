@@ -114,13 +114,13 @@ export default function Header() {
       </div>
       <NavbarCollapse>
         <NavbarLink active={path === "/"} as={"div"}>
-          <Link to="/">Home</Link>
+          <Link to="/" className="lg:text-base xl:text-lg">Home</Link>
         </NavbarLink>
         <NavbarLink active={path === "/about"} as={"div"}>
-          <Link to="/about">About</Link>
+          <Link to="/about" className="lg:text-base xl:text-lg">About</Link>
         </NavbarLink>
         <NavbarLink active={path === "/projects"} as={"div"}>
-          <Link to="/projects">Projects</Link>
+          <Link to="/projects" className="lg:text-base xl:text-lg">Projects</Link>
         </NavbarLink>
       </NavbarCollapse>
     </Navbar>

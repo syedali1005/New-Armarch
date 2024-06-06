@@ -124,17 +124,17 @@ export default function Search() {
         </form>
       </div>
       <div className="w-full">
-        <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5 text-center">
+        <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3 mt-5 md:text-5xl  text-center mb-20 text-stroke-2-gold hero-title1">
           Posts Results
         </h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="p-7 flex flex-wrap gap-4 jst justify-center">
           {!loading && posts.length === 0 && (
             <p className="text-xl text-gray-500">No posts found.</p>
           )}
           {loading && <p className="text-xl text-gray-500">Loading...</p>}
           {!loading &&
             posts &&
-            posts.map((post) => <PostCard key={post._id} post={post} />)}
+            posts.map((post) => <PostCard key={post._id} post={post}/>)}
           {showMore && (
             <button
               onClick={handleShowMore}
