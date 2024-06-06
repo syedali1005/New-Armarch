@@ -8,6 +8,9 @@ body {
   height: 100vh;
   background-color: #f9fafb; /* Add a light background color */
   font-family: "Oswald", sans-serif;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
 }
 
 @media ( min-width:1147px){
