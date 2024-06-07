@@ -1,34 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   height: 100vh;
   background-color: #f9fafb; /* Add a light background color */
   font-family: "Oswald", sans-serif;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
 }
 
-@media ( min-width:1147px){
+@media (min-width: 1147px) {
+  .hero-title {
+    font-size: 96px;
+    line-height: 1.104;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    will-change: transform, opacity;
+  }
+}
+
 .hero-title {
-  font-size: 96px;
-  line-height: 1.104;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
-}
-
-.hero-title{
   color: rgba(255, 255, 255, 0.1) !important;
 }
 
-@media ( min-width:1147px){
+@media (min-width: 1147px) {
   .hero-title1 {
     font-size: 40px;
     line-height: 1.104;
@@ -37,27 +40,29 @@ body {
     text-transform: uppercase;
     margin-bottom: 0;
     color: rgba(255, 255, 255, 0.1) !important;
+    will-change: transform, opacity;
   }
-  }
+}
 
-  .hero-title1 {
-    font-size: 30px;
-    line-height: 1.104;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-bottom: 0;
-    color: rgba(255, 255, 255, 0.1) !important;
-  }
+.hero-title1 {
+  font-size: 30px;
+  line-height: 1.104;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.1) !important;
+}
+
 .ql-editor {
   font-size: 1.05rem;
 }
 
-@media ( min-width:1147px){
-  .jst{
+@media (min-width: 1147px) {
+  .jst {
     justify-content: start;
   }
-  }
+}
 
 .post-content p {
   margin-bottom: 1rem; /* Increase spacing between paragraphs */
@@ -66,13 +71,13 @@ body {
 .post-content h1 {
   font-size: 2.5rem; /* Increase font size for main headings */
   font-weight: 700; /* Increase font weight for main headings */
-  font-family: 'Arial', sans-serif; /* Change font family */
+  font-family: "Arial", sans-serif; /* Change font family */
   margin: 2rem 0; /* Increase top and bottom margins for main headings */
 }
 
 .post-content h2 {
   font-size: 2rem; /* Increase font size for subheadings */
-  font-family: 'Arial', sans-serif; /* Change font family */
+  font-family: "Arial", sans-serif; /* Change font family */
   margin: 1.5rem 0; /* Increase top and bottom margins for subheadings */
 }
 
@@ -95,7 +100,8 @@ body {
 }
 
 .shadow-light {
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1),
+    0 1px 3px rgba(255, 255, 255, 0.08);
 }
 
 /* Rounded corners */
@@ -131,12 +137,12 @@ body {
 @keyframes border-pulse {
   0% {
     transform: scale(1);
-    border-color: rgba(255, 229, 140, 0.7); 
+    border-color: rgba(255, 229, 140, 0.7);
   }
 
   50% {
     transform: scale(1.05);
-    border-color: rgba(255, 229, 140, 0.5); 
+    border-color: rgba(255, 229, 140, 0.5);
   }
 
   100% {
@@ -147,6 +153,7 @@ body {
 
 .image-container {
   position: relative;
+  will-change: transform;
 }
 
 .border-animation {
@@ -163,9 +170,11 @@ body {
 }
 
 .gradient-yellow-to-yellow {
-  background: linear-gradient(90deg, #FFE58C 0%, #FFE58C 100%);
+  background: linear-gradient(90deg, #ffe58c 0%, #ffe58c 100%);
 }
 
 .blur {
-  filter: blur(2px); /* Adjust the value to control the strength of the blur effect */
+  filter: blur(
+    2px
+  ); /* Adjust the value to control the strength of the blur effect */
 }
