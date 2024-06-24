@@ -1,15 +1,14 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import { motion } from 'framer-motion';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Slider from 'react-slick';
 import PostCard from '../components/PostCard';
 
-export default function Home() {
+const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [carouselImages, setCarouselImages] = useState([
+  const [carouselImages] = useState([
     {
       src: '/aat3-01-1-e1709530321931.webp',
       text: 'WHERE ARCHITECTURE\nMEETS\nSUSTAINABILITY',
@@ -153,4 +152,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;

@@ -1,19 +1,59 @@
 import { useEffect, useState } from "react";
-import PostCard from "../components/PostCard";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import PostCard from "../components/PostCard";
+import LazyLoad from 'react-lazyload';
 
 export default function Projects() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("/api/post/getPosts");
-      const data = await res.json();
-      setPosts(data.posts);
+      try {
+        const res = await fetch("/api/post/getPosts");
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await res.json();
+        setPosts(data.posts);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
     };
     fetchPosts();
   }, []);
+
+  if (loading) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        style={{ fontFamily: "Oswald, sans-serif" }}
+        className="flex justify-center items-center min-h-screen"
+      >
+        <div>Loading...</div>
+      </motion.div>
+    );
+  }
+
+  if (error) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        style={{ fontFamily: "Oswald, sans-serif" }}
+        className="flex justify-center items-center min-h-screen"
+      >
+        <div>{error}</div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -48,7 +88,9 @@ export default function Projects() {
                   className="max-w-xs mx-auto"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <PostCard post={post} />
+                  <LazyLoad height={200} offset={100}>
+                    <PostCard post={post} />
+                  </LazyLoad>
                 </motion.div>
               ))}
             </motion.div>

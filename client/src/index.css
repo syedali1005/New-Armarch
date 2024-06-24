@@ -178,3 +178,44 @@ body {
     2px
   ); /* Adjust the value to control the strength of the blur effect */
 }
+
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-modal-body {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  background: transparent; /* Remove background */
+  padding: 20px;
+  overflow-y: auto;
+  border-radius: 10px;
+  overflow-x: hidden !important;
+}
+
+.custom-modal-image {
+  max-height: 80vh;
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { Button, Spinner } from "flowbite-react";
-import CallToAction from "../components/CallToAction";
-import LazyLoad from 'react-lazyload'; // Import LazyLoad component
-import { motion } from "framer-motion";
-import 'lazysizes';
-import 'lazysizes/plugins/parent-fit/ls.parent-fit'; // Add parent-fit plugin for better image fitting
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Spinner } from 'flowbite-react';
+import CallToAction from '../components/CallToAction';
+import LazyLoad from 'react-lazyload';
+import { motion } from 'framer-motion';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-export default function PostPage() {
+const PostPage = () => {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -27,15 +29,6 @@ export default function PostPage() {
         setPost(data.posts[0]);
         setLoading(false);
         setError(false);
-
-        // Prefetch images
-        data.posts[0].images.forEach((image) => {
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = image;
-          document.head.appendChild(link);
-        });
-
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -43,6 +36,28 @@ export default function PostPage() {
     };
     fetchPost();
   }, [postSlug]);
+
+  const openImage = (index) => {
+    setSelectedImageIndex(index);
+  };
+
+  const closeImage = () => {
+    setSelectedImageIndex(null);
+  };
+
+  const sliderSettings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: selectedImageIndex,
+  };
+
+  const handleModalClick = (event) => {
+    event.stopPropagation();
+  };
 
   return (
     <motion.main
@@ -82,23 +97,19 @@ export default function PostPage() {
             {post.images.map((image, index) => (
               <LazyLoad height={200} offset={100} key={index}>
                 <div
-                  className="max-w-md w-full md:max-w-lg transform transition-transform hover:scale-105"
+                  className="max-w-md w-full md:max-w-lg transform transition-transform hover:scale-105 cursor-pointer"
+                  onClick={() => openImage(index)}
                 >
-                  <div className="w-full h-auto object-cover rounded-lg shadow-md bg-gray-200" style={{ minHeight: '270px' }}>
-                    {/* Add loading animation here */}
-                    {loading ? (
-                      <div className="animate-pulse w-full h-auto object-cover rounded-lg shadow-md bg-gray-300" style={{ minHeight: '270px' }} />
-                    ) : (
-                      <img
-                        data-src={image}
-                        alt={`Image ${index}`}
-                        loading="lazy"
-                        className="w-full h-auto object-cover rounded-lg shadow-md lazyload"
-                        data-sizes="auto"
-                        data-srcset={`${image}?w=400 400w, ${image}?w=800 800w, ${image}?w=1200 1200w`}
-                        sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
-                      />
-                    )}
+                  <div
+                    className="w-full h-auto object-cover rounded-lg shadow-md bg-gray-200"
+                    style={{ minHeight: '270px' }}
+                  >
+                    <img
+                      src={image}
+                      alt={`Image ${index}`}
+                      loading="lazy"
+                      className="w-full h-auto object-cover rounded-lg shadow-md"
+                    />
                   </div>
                 </div>
               </LazyLoad>
@@ -122,8 +133,27 @@ export default function PostPage() {
           <div className="max-w-4xl mx-auto w-full">
             <CallToAction />
           </div>
+          {selectedImageIndex !== null && (
+            <div className="custom-modal-overlay" onClick={closeImage}>
+              <div className="custom-modal-body" onClick={handleModalClick}>
+                <Slider {...sliderSettings}>
+                  {post.images.map((image, index) => (
+                    <div key={index} className="flex justify-center items-center">
+                      <img
+                        src={image}
+                        alt={`Gallery Image ${index}`}
+                        className="custom-modal-image object-contain max-h-screen max-w-full"
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
+          )}
         </>
       )}
     </motion.main>
   );
-}
+};
+
+export default PostPage;
