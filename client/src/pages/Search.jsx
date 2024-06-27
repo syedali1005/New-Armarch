@@ -40,7 +40,7 @@ export default function Search() {
       const data = await res.json();
       setPosts(data.posts);
       setLoading(false);
-      setShowMore(data.posts.length === 9);
+      setShowMore(data.posts.length === 10);
     };
 
     fetchPosts();
