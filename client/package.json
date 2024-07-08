@@ -15,6 +15,7 @@
     "flowbite-react": "^0.7.0",
     "framer-motion": "^11.2.10",
     "lazysizes": "^5.3.2",
+    "mern-blog": "file:..",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
