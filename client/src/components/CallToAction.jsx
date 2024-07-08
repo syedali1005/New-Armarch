@@ -17,7 +17,7 @@ export default function CallToAction() {
             </Button>
         </div>
         <div className="p-4 flex-1">
-            <img src="https://i.ibb.co/Wtf2yCW/D5-Image-43-20231012-181317.png" alt="Virtual Tour Image" className="max-w-full rounded-lg shadow-md" />
+            <img src="/virtual-tour.png" alt="Virtual Tour Image" className="max-w-full rounded-lg shadow-md" />
         </div>
     </div>
   )
